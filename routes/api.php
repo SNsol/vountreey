@@ -24,4 +24,8 @@ Route::group(['prefix' => 'v1'], function() {
 
 Route::group(['prefix' => 'v1'], function() {
 	Route::post('change-password', 'Api\AuthController@changePassword');
+	Route::post('add-project', 'Api\ProjectController@addProject');
+	Route::post('project-list', 'Api\ProjectController@projectList');
+	Route::post('update-project', 'Api\ProjectController@updateProject');
+	Route::post('remove-project', 'Api\ProjectController@removeProject');
 });
