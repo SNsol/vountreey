@@ -68,6 +68,17 @@ class ProjectController extends Controller
 		$project->save();
 		return Response::json(array('status' => true, 'message' => 'Updated Successfully.' ));
 	}
+
+	public function projectDetails(Request $request){
+		$validator = Validator::make($request->all(), [
+			'project_id' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+		$project = Project::find($request->project_id);
+		return Response::json(array('status' => true, 'data' => $project ));
+	}
 	
 	public function removeProject(Request $request){
 		try{

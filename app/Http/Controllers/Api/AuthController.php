@@ -41,7 +41,7 @@ class AuthController extends Controller
         $user = User::first();
         $token = JWTAuth::fromUser($user);
         
-        return Response::json(compact('token'));
+        return Response::json(compact('token','user'));
     }
 	
 	 public function login(Request $request)
@@ -61,7 +61,8 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-        return response()->json(compact('token'));
+		$user = JWTAuth::toUser($token);
+        return response()->json(compact('token','user'));
     }
 	
 	public function changePassword(Request $request){

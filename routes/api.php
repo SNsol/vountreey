@@ -22,10 +22,14 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('password/reset', 'Api\ResetPasswordController@reset');
 });
 
-Route::group(['prefix' => 'v1'], function() {
+Route::group(['prefix' => 'v1','middleware' => 'api'], function() {
 	Route::post('change-password', 'Api\AuthController@changePassword');
 	Route::post('add-project', 'Api\ProjectController@addProject');
 	Route::post('project-list', 'Api\ProjectController@projectList');
 	Route::post('update-project', 'Api\ProjectController@updateProject');
+	Route::post('project-details', 'Api\ProjectController@projectDetails');
 	Route::post('remove-project', 'Api\ProjectController@removeProject');
+
+
+	Route::post('add-hour', 'Api\HourController@addHour');
 });
