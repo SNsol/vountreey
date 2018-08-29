@@ -17,9 +17,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('register', 'Api\AuthController@register');
 	Route::post('login', 'Api\AuthController@login');
 	// Password Reset Routes...
-    Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
-    Route::get('password/reset/{token}', 'Api\ResetPasswordController@showResetForm');
-    Route::post('password/reset', 'Api\ResetPasswordController@reset');
+    Route::post('forgot_password/email', 'Api\ForgotPasswordController@sendResetLink');
 });
 
 Route::group(['prefix' => 'v1','middleware' => 'api'], function() {
