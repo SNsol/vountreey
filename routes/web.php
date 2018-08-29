@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('forgot_password/reset/{token}', 'Api\ResetPasswordController@resetForm');
+Route::post('forgot_password/reset', 'Api\ResetPasswordController@reset')->name('reset_password');
