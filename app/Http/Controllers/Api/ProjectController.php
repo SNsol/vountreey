@@ -86,7 +86,7 @@ class ProjectController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-		$project = Project::find($request->project_id);
+		$project = Project::with('hours')->find($request->project_id);
 		return Response::json(array('status' => true, 'data' => $project ));
 	}
 	
