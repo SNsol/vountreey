@@ -53,7 +53,7 @@ class ForgotPasswordController extends Controller
             ]);
             $token = URL::to('forgot_password/reset/'.$token);
 			$res = Mail::to($request->email)->send(new SendApiPasswordMail($token));
-			return response()->json(['status' => '1','error' => 'Email Send Successfully.']);
+			return response()->json(['status' => '1','msg' => 'Email Send Successfully.']);
 		}else{
 			return response()->json(['status' => '0','error' => 'Email does not exists.']);
 		}

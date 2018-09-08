@@ -23,7 +23,6 @@ class HourController extends Controller
 		}
 		$validator = Validator::make($request->all(), [
 			'project_id' => 'required',
-            'date'=> 'required',
             'start_time'=> 'nullable',
             'end_time'=> 'nullable',
             'hour'=> 'nullable',

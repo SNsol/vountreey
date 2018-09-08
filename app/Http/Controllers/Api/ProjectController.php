@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Project;
 use App\User;
+use App\Hour;
 use Validator;
 use JWTAuth;
 use Response;
@@ -50,7 +51,16 @@ class ProjectController extends Controller
 		   exit();
 		}
 		$project = User::with('projects')->find($user->id);
-		return Response::json(array('status' => true, 'data' => $project->projects ));
+		foreach($project->projects as $key => $value){
+			$date = date('Y-m-d',strtotime($value->created_at));
+			$data[$key]['id'] = $value->id;
+			$data[$key]['title'] = $value->title;
+			$data[$key]['description'] = $value->description;
+			$data[$key]['create_date'] = $date;
+			$hours = Hour::where('project_id',$value->id)->get();
+			$data[$key]['hours'] = $hours;
+		}
+		return Response::json(array('status' => true, 'data' => $data ));
 	}
 	
 	public function updateProject(Request $request){
