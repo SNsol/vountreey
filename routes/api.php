@@ -30,4 +30,5 @@ Route::group(['prefix' => 'v1','middleware' => 'api'], function() {
 
 
 	Route::post('add-hour', 'Api\HourController@addHour');
+	Route::post('remove-hour', 'Api\HourController@removeHours');
 });

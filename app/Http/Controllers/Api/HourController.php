@@ -44,4 +44,24 @@ class HourController extends Controller
         return Response::json(array('status' => true, 'message' => 'Hours Added Successfully.' ));
     }
 
+    public function removeHours(Request $request){
+		try{
+		   $user = JWTAuth::parseToken()->toUser();
+		}catch (\Exception $e){
+		   echo json_encode([$e->getMessage()]);
+		   exit();
+		}
+		$validator = Validator::make($request->all(), [
+			'hour_id' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $hour = Hour::find($request->hour_id);
+		$hour->delete();
+        return Response::json(array('status' => true, 'message' => 'Deleted Successfully.' ));
+        
+	}
+
 }
