@@ -29,6 +29,6 @@ class SendApiPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.api_password');
+        return $this->subject('Recover Your Password!')->view('emails.api_password');
     }
 }
