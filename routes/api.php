@@ -13,14 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'v1'], function() {
+Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function() {
     Route::post('register', 'Api\AuthController@register');
 	Route::post('login', 'Api\AuthController@login');
 	// Password Reset Routes...
     Route::post('forgot_password/email', 'Api\ForgotPasswordController@sendResetLink');
 });
 
-Route::group(['prefix' => 'v1','middleware' => 'api'], function() {
+Route::group(['prefix' => 'v1','middleware' => ['api', 'cors']], function() {
 	Route::post('change-password', 'Api\AuthController@changePassword');
 	Route::post('add-project', 'Api\ProjectController@addProject');
 	Route::post('project-list', 'Api\ProjectController@projectList');
