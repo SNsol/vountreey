@@ -38,9 +38,9 @@ class ProjectController extends Controller
 		$user = User::find($user->id);
 		$user->projects()->attach($project);
 		*/
-		$user->projects()->create($request->all());
+		$project = $user->projects()->create($request->all());
 		
-		return Response::json(array('status' => true, 'message' => 'Added Successfully.' ));
+		return Response::json(array('status' => true, 'message' => 'Added Successfully.', 'project' => $project ));
 	}
 	
 	public function projectList(Request $request){

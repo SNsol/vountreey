@@ -33,12 +33,12 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-        User::create([
+        $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
         ]);
-        $user = User::first();
+
         $token = JWTAuth::fromUser($user);
         
         return response()->json(array('status' => true, 'token' => compact('token','user')));
